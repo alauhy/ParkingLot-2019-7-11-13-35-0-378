@@ -3,32 +3,49 @@ package com.thoughtworks.tdd;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class ParkingBoy {
+public class ParkingBoy implements Parkable,Fetchable{
     private Parkinglot parkinglot = new Parkinglot(10);
 
-    public ParkinglotTicket park(Car car) {
+    @Override
+    public ParkinglotTicket park(Car car) throws Exception {
+       try {
+           return parkinglot.park(car);
+       }catch (Exception e){
+           throw e;
+       }
 
-        return parkinglot.park(car);
+
 
     }
 
-    public List<ParkinglotTicket> park(List<Car> cars) {
-        return cars.stream().map(e -> parkinglot.park(e)).collect(Collectors.toList());
+//    public List<ParkinglotTicket> park(List<Car> cars) throws Exception {
+//
+//        List<ParkinglotTicket> tickets=cars.stream().map(e -> parkinglot.park(e)).collect(Collectors.toList());
+//
+//
+//    }
+    @Override
+    public Car fetchCarbyTicket(ParkinglotTicket ticket) throws Exception {
+        try {
+            return parkinglot.fetchCarbyTicket(ticket);
+        } catch (Exception e) {
+            throw e;
+        }
 
     }
 
-    public Car fetchCarbyTicket(ParkinglotTicket ticket) {
+//    public List<Car> fetchCarbyTicket(List<ParkinglotTicket> tickets) {
+//
+//        return tickets.stream().map(e -> parkinglot.fetchCarbyTicket(e)).collect(Collectors.toList());
+//    }
+    @Override
+    public Car fetchCarbyTicket() throws Exception{
+       try{
+           return parkinglot.fetchCarbyTicket();
+       }catch (Exception e){
+           throw e;
+       }
 
-        return parkinglot.fetchCarbyTicket(ticket);
     }
 
-    public List<Car> fetchCarbyTicket(List<ParkinglotTicket> tickets) {
-
-        return tickets.stream().map(e -> parkinglot.fetchCarbyTicket(e)).collect(Collectors.toList());
-    }
-
-    public Car fetchCarbyTicket() {
-
-        return parkinglot.fetchCarbyTicket();
-    }
 }

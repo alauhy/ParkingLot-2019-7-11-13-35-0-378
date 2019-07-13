@@ -3,35 +3,36 @@ package com.thoughtworks.tdd;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Parkinglot {
+public class Parkinglot implements Parkable,Fetchable {
     private final int capacity;
     private Map<ParkinglotTicket, Car> cars = new HashMap<ParkinglotTicket, Car>();
 
     public Parkinglot(int capacity) {
         this.capacity = capacity;
     }
-
-    public ParkinglotTicket park(Car car) {
+    @Override
+    public ParkinglotTicket park(Car car) throws Exception{
         if(isFull()==false){
             ParkinglotTicket ticket = new ParkinglotTicket();
             cars.put(ticket, car);
             return ticket;
         }
-        return null;
+        throw new Exception("Not enough position");
     }
-
-    public Car fetchCarbyTicket(ParkinglotTicket ticket) {
+    @Override
+    public Car fetchCarbyTicket(ParkinglotTicket ticket) throws Exception{
         if(cars.containsKey(ticket)){
             Car car=cars.get(ticket);
             cars.remove(ticket);
             return car;
         }
-        return null;
+        else throw new Exception("Unrecongnized parking ticket.");
 
     }
-    public Car fetchCarbyTicket() {
+    @Override
+    public Car fetchCarbyTicket() throws Exception{
 
-        return null;
+        throw new Exception("Please provide your parking ticket.");
 
     }
 

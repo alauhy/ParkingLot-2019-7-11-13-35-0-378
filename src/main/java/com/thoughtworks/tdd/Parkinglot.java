@@ -21,7 +21,18 @@ public class Parkinglot {
     }
 
     public Car fetchCarbyTicket(ParkinglotTicket ticket) {
-        return cars.get(ticket);
+        if(cars.containsKey(ticket)){
+            Car car=cars.get(ticket);
+            cars.remove(ticket);
+            return car;
+        }
+        return null;
+
+    }
+    public Car fetchCarbyTicket() {
+
+        return null;
+
     }
 
     private boolean isFull() {
@@ -31,5 +42,6 @@ public class Parkinglot {
         return false;
 
     }
+
 
 }

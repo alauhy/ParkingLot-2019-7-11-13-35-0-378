@@ -29,4 +29,16 @@ public class Parkinglot_Test {
         Assertions.assertEquals(null,parkinglotTicket1);
     }
 
+    @Test
+    public void should_return_null_when_ticket_uses_twice_give_ticket() {
+//        given
+        Parkinglot parkinglot = new Parkinglot(1);
+        Car car1 = new Car();
+//        when
+        ParkinglotTicket parkinglotTicket = parkinglot.park(car1);
+        Car car=parkinglot.fetchCarbyTicket(parkinglotTicket);
+//        then
+        Assertions.assertEquals(null,parkinglot.fetchCarbyTicket(parkinglotTicket));
+    }
+
 }

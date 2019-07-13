@@ -21,8 +21,14 @@ public class ParkingBoy {
 
         return parkinglot.fetchCarbyTicket(ticket);
     }
+
     public List<Car> fetchCarbyTicket(List<ParkinglotTicket> tickets) {
 
         return tickets.stream().map(e -> parkinglot.fetchCarbyTicket(e)).collect(Collectors.toList());
+    }
+
+    public Car fetchCarbyTicket() {
+
+        return parkinglot.fetchCarbyTicket();
     }
 }

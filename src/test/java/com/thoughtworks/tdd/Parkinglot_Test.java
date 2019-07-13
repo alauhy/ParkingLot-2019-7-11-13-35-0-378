@@ -40,5 +40,24 @@ public class Parkinglot_Test {
 //        then
         Assertions.assertEquals(null,parkinglot.fetchCarbyTicket(parkinglotTicket));
     }
-
+    @Test
+    public void should_return_null_when_fetch_car_give_no_ticket() {
+//        given
+        Parkinglot parkinglot = new Parkinglot(1);
+        Car car1 = new Car();
+//        when
+        ParkinglotTicket parkinglotTicket = parkinglot.park(car1);
+//        then
+        Assertions.assertEquals(null,parkinglot.fetchCarbyTicket());
+    }
+    @Test
+    public void should_return_null_when_fetch_give_wrong_ticket(){
+        //        given
+        Parkinglot parkinglot = new Parkinglot(1);
+        Car car1 = new Car();
+//        when
+        ParkinglotTicket parkinglotTicket = parkinglot.park(car1);
+//        then
+        Assertions.assertEquals(null,parkinglot.fetchCarbyTicket(new ParkinglotTicket()));
+    }
 }

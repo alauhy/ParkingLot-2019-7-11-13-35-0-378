@@ -236,5 +236,29 @@ public class Parkinglot_Test {
 //        then
         Assertions.assertEquals(car1, car);
     }
+    @Test
+    public void should_park_car_but_no_car_fetch_when_manage_send_a_parkingboy_to_park_anoother_to_fetch_give_a_car() throws Exception {
+
+//        given
+        Parkinglot parkinglot1 = new Parkinglot(10);
+        Parkinglot parkinglot2 = new Parkinglot(10);
+        List<Parkinglot> parkinglots = new ArrayList<>();
+        parkinglots.add(parkinglot1);
+        parkinglots.add(parkinglot2);
+        Manager manager = new Manager(parkinglots);
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingBoy parkingBoy2 = new ParkingBoy();
+        manager.addParkingboy(parkingBoy);
+        manager.addParkingboy(parkingBoy2);
+        manager.provideParkinglottoParkingboy(parkingBoy);
+        manager.provideParkinglottoParkingboy(parkingBoy2);
+        Car car1 = new Car();
+//        when
+        manager.setParkable(parkingBoy);
+        manager.setFetchable(parkingBoy2);
+        ParkinglotTicket parkinglotTicket=manager.parkCar(car1);
+//        then
+        Assertions.assertThrows(Exception.class, ()->manager.fetchCar(parkinglotTicket));
+    }
 
 }

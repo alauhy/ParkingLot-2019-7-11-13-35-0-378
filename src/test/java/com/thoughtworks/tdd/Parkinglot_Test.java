@@ -260,5 +260,23 @@ public class Parkinglot_Test {
 //        then
         Assertions.assertThrows(Exception.class, ()->manager.fetchCar(parkinglotTicket));
     }
+    @Test
+    public void should_park_car_and_fetch_car_give_manage_a_car() throws Exception {
+
+//        given
+        Parkinglot parkinglot1 = new Parkinglot(10);
+        Parkinglot parkinglot2 = new Parkinglot(10);
+        List<Parkinglot> parkinglots = new ArrayList<>();
+        parkinglots.add(parkinglot1);
+        parkinglots.add(parkinglot2);
+        Manager manager = new Manager(parkinglots);
+
+        Car car1 = new Car();
+//        when
+
+        ParkinglotTicket parkinglotTicket=manager.park(car1);
+//        then
+        Assertions.assertEquals(car1,manager.fetchCarbyTicket(parkinglotTicket));
+    }
 
 }

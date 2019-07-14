@@ -11,7 +11,7 @@ public class Manager extends ParkingBoy {
     private Fetchable fetchable;
     private Parkable parkable;
     private List<ParkingBoy> parkingboyManageList = new ArrayList<>();
-    private List<Parkinglot> parkinglots = new ArrayList<>();
+    private List<Parkinglot> parkinglots;
     private Map<Parkinglot,ParkingBoy> parkinglotManagement = new HashMap<>();
 
 
@@ -23,6 +23,43 @@ public class Manager extends ParkingBoy {
 
     public Manager(List<Parkinglot> parkinglots) {
         this.parkinglots = parkinglots;
+    }
+
+    @Override
+    public ParkinglotTicket park(Car car) throws Exception {
+        for (int i = 0; i < parkinglots.size(); i++) {
+            try {
+
+                return parkinglots.get(i).park(car);
+            } catch (Exception e) {
+                if (i < parkinglots.size() - 1) {
+                    continue;
+                }
+
+                throw e;
+
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Car fetchCarbyTicket(ParkinglotTicket ticket) throws Exception {
+        for (int i = 0; i < parkinglots.size(); i++) {
+            try {
+                return parkinglots.get(i).fetchCarbyTicket(ticket);
+            } catch (Exception e) {
+                if (i < parkinglots.size() - 1) {
+                    continue;
+                } else throw e;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Car fetchCarbyTicket() throws Exception {
+        return super.fetchCarbyTicket();
     }
 
     public void provideParkinglottoParkingboy(ParkingBoy parkingBoy)throws Exception{

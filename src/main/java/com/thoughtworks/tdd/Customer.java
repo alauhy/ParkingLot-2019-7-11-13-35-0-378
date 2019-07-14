@@ -13,7 +13,7 @@ public class Customer {
     public void setFetchable(Fetchable fetchable) {
         this.fetchable = fetchable;
     }
-    public String parkMyCar(Car car) throws Exception{
+    public String parkMyCar()throws Exception{
         try{
            this.parkinglotTicket=parkable.park(car);
            return "";
@@ -34,6 +34,14 @@ public class Customer {
     public String fetchMyCar(ParkinglotTicket ticket) throws Exception{
         try{
             this.car=fetchable.fetchCarbyTicket(ticket);
+            return "";
+        }catch (Exception e){
+            return e.getMessage();
+        }
+    }
+    public String fetchMyCar() throws Exception{
+        try{
+            this.car=fetchable.fetchCarbyTicket();
             return "";
         }catch (Exception e){
             return e.getMessage();

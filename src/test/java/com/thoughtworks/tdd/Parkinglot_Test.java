@@ -1,5 +1,6 @@
 package com.thoughtworks.tdd;
 
+import net.bytebuddy.implementation.bind.annotation.Super;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +28,7 @@ public class Parkinglot_Test {
         Car car2 = new Car();
 //        when
         ParkinglotTicket parkinglotTicket = parkinglot.park(car1);
-//        ParkinglotTicket parkinglotTicket1 = parkinglot.park(car2);
+
 //        then
         Assertions.assertThrows(Exception.class, () -> parkinglot.park(car2));
     }
@@ -86,21 +87,6 @@ public class Parkinglot_Test {
 
     }
 
-//    @Test
-//    public void should_parking_boy_park_multiple_cars_and_fetch_cars() throws Exception{
-////        given
-//        List<Car> cars = new ArrayList<>();
-//        cars.add(new Car());
-//        cars.add(new Car());
-//        cars.add(new Car());
-//        cars.add(new Car());
-//        ParkingBoy parkingBoy = new ParkingBoy();
-////        when
-//        List<ParkinglotTicket> parkinglotTickets = parkingBoy.park(cars);
-////        then
-//        Assertions.assertEquals(cars, parkingBoy.fetchCarbyTicket(parkinglotTickets));
-//
-//    }
 
     @Test
     public void should_return_null_when_fetch_car_give_parkingboy_no_ticket() throws Exception {
@@ -203,6 +189,24 @@ public class Parkinglot_Test {
 
 //        then
         Assertions.assertEquals(car2,smartParkingboy.getParkinglots().get(1).fetchCarbyTicket(parkinglotTicket2));
+    }
+    @Test
+    public void should_return_car2_in_parkinglot2_when_park_smartly_give_super_smart_parking_boy_a_car() throws Exception {
+//        given
+        SuperSmartParkingboy superSmartParkingboy = new SuperSmartParkingboy();
+        Parkinglot parkinglot1 = new Parkinglot(4);
+        Parkinglot parkinglot2 = new Parkinglot(2);
+        List<Parkinglot> parkinglots = new ArrayList<>();
+        parkinglots.add(parkinglot1);
+        parkinglots.add(parkinglot2);
+        Car car1 = new Car();
+        Car car2 = new Car();
+        superSmartParkingboy.setParkinglots(parkinglots);
+        ParkinglotTicket parkinglotTicket1 = superSmartParkingboy.park(car1);
+        ParkinglotTicket parkinglotTicket2 = superSmartParkingboy.park(car2);
+
+//        then
+        Assertions.assertEquals(car2,superSmartParkingboy.getParkinglots().get(1).fetchCarbyTicket(parkinglotTicket2));
     }
 
 }

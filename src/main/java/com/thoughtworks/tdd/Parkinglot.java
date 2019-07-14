@@ -11,7 +11,12 @@ public class Parkinglot implements Parkable, Fetchable {
         this.capacity = capacity;
     }
 
+    public int getCapacity() {
+        return capacity;
+    }
+
     @Override
+
     public ParkinglotTicket park(Car car) throws Exception {
         if (isFull() == false) {
             ParkinglotTicket ticket = new ParkinglotTicket();
@@ -50,5 +55,7 @@ public class Parkinglot implements Parkable, Fetchable {
         return capacity - cars.size();
     }
 
-
+    public double validRate(){
+        return restCapacity()/capacity;
+    }
 }

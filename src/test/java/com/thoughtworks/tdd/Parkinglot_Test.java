@@ -237,7 +237,7 @@ public class Parkinglot_Test {
         Assertions.assertEquals(car1, car);
     }
     @Test
-    public void should_park_car_but_no_car_fetch_when_manage_send_a_parkingboy_to_park_anoother_to_fetch_give_a_car() throws Exception {
+    public void should_park_car_but_no_car_fetch_when_manage_send_a_parkingboy_to_park_another_to_fetch_give_a_car() throws Exception {
 
 //        given
         Parkinglot parkinglot1 = new Parkinglot(10);
@@ -277,6 +277,88 @@ public class Parkinglot_Test {
         ParkinglotTicket parkinglotTicket=manager.park(car1);
 //        then
         Assertions.assertEquals(car1,manager.fetchCarbyTicket(parkinglotTicket));
+    }
+    @Test
+    public void should_Unrecongnized_parking_ticket_when_fetch_give_manage_send_parking_boy_to_fetch_car_use_ticket_twice_by_customer() throws Exception {
+//        given
+        Parkinglot parkinglot1 = new Parkinglot(10);
+        Parkinglot parkinglot2 = new Parkinglot(10);
+        List<Parkinglot> parkinglots = new ArrayList<>();
+        Customer customer = new Customer();
+        parkinglots.add(parkinglot1);
+        parkinglots.add(parkinglot2);
+        Manager manager = new Manager(parkinglots);
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingBoy parkingBoy2 = new ParkingBoy();
+        customer.setParkable(manager);
+        customer.setFetchable(manager);
+        manager.addParkingboy(parkingBoy);
+        manager.addParkingboy(parkingBoy2);
+        manager.provideParkinglottoParkingboy(parkingBoy);
+        manager.provideParkinglottoParkingboy(parkingBoy2);
+        Car car1 = new Car();
+//        when
+        manager.setParkable(parkingBoy);
+        manager.setFetchable(parkingBoy);
+        customer.parkMyCar();
+        customer.fetchMyCar(customer.getParkinglotTicket());
+//        then
+        Assertions.assertEquals("Unrecongnized parking ticket.", customer.fetchMyCar(customer.getParkinglotTicket()));
+
+    }
+    @Test
+    public void should_Unrecongnized_parking_ticket_when_fetch_give_manage_send_parking_boy_to_fetch_car_use_other_ticket_by_customer() throws Exception {
+//        given
+        Parkinglot parkinglot1 = new Parkinglot(10);
+        Parkinglot parkinglot2 = new Parkinglot(10);
+        List<Parkinglot> parkinglots = new ArrayList<>();
+        Customer customer = new Customer();
+        parkinglots.add(parkinglot1);
+        parkinglots.add(parkinglot2);
+        Manager manager = new Manager(parkinglots);
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingBoy parkingBoy2 = new ParkingBoy();
+        customer.setParkable(manager);
+        customer.setFetchable(manager);
+        manager.addParkingboy(parkingBoy);
+        manager.addParkingboy(parkingBoy2);
+        manager.provideParkinglottoParkingboy(parkingBoy);
+        manager.provideParkinglottoParkingboy(parkingBoy2);
+        Car car1 = new Car();
+//        when
+        manager.setParkable(parkingBoy);
+        manager.setFetchable(parkingBoy);
+        customer.parkMyCar();
+
+//        then
+        Assertions.assertEquals("Unrecongnized parking ticket.", customer.fetchMyCar(new ParkinglotTicket()));
+
+    }
+    @Test
+    public void should_Please_provide_your_parking_ticket_when_fetch_give_manage_send_parking_boy_to_fetch_car_use_no_ticket_by_customer() throws Exception {
+//        given
+        Parkinglot parkinglot1 = new Parkinglot(10);
+        Parkinglot parkinglot2 = new Parkinglot(10);
+        List<Parkinglot> parkinglots = new ArrayList<>();
+        Customer customer = new Customer();
+        parkinglots.add(parkinglot1);
+        parkinglots.add(parkinglot2);
+        Manager manager = new Manager(parkinglots);
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingBoy parkingBoy2 = new ParkingBoy();
+        customer.setParkable(manager);
+        customer.setFetchable(manager);
+        manager.addParkingboy(parkingBoy);
+        manager.addParkingboy(parkingBoy2);
+        manager.provideParkinglottoParkingboy(parkingBoy);
+        manager.provideParkinglottoParkingboy(parkingBoy2);
+//        when
+        manager.setParkable(parkingBoy);
+        manager.setFetchable(parkingBoy);
+        customer.parkMyCar();
+//        then
+        Assertions.assertEquals("Please provide your parking ticket.",customer.fetchMyCar());
+
     }
 
 }

@@ -3,7 +3,7 @@ package com.thoughtworks.tdd;
 public class Customer {
     private Parkable parkable;
     private Fetchable fetchable;
-    private Car car;
+    private Car car = new Car();
     private ParkinglotTicket parkinglotTicket;
 
     public void setParkable(Parkable parkable) {

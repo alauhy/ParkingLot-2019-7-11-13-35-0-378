@@ -27,31 +27,42 @@ public class Manager extends ParkingBoy {
 
     @Override
     public ParkinglotTicket park(Car car) throws Exception {
-        for (int i = 0; i < parkinglots.size(); i++) {
-            try {
+        if(parkable!=null){
+            return parkCar(car);
+        }
+        else {
+            for (int i = 0; i < parkinglots.size(); i++) {
+                try {
 
-                return parkinglots.get(i).park(car);
-            } catch (Exception e) {
-                if (i < parkinglots.size() - 1) {
-                    continue;
+                    return parkinglots.get(i).park(car);
+                } catch (Exception e) {
+                    if (i < parkinglots.size() - 1) {
+                        continue;
+                    }
+
+                    throw e;
+
                 }
-
-                throw e;
-
             }
         }
+
         return null;
     }
 
     @Override
     public Car fetchCarbyTicket(ParkinglotTicket ticket) throws Exception {
-        for (int i = 0; i < parkinglots.size(); i++) {
-            try {
-                return parkinglots.get(i).fetchCarbyTicket(ticket);
-            } catch (Exception e) {
-                if (i < parkinglots.size() - 1) {
-                    continue;
-                } else throw e;
+        if(fetchable!=null){
+            return fetchCar(ticket);
+        }
+        else {
+            for (int i = 0; i < parkinglots.size(); i++) {
+                try {
+                    return parkinglots.get(i).fetchCarbyTicket(ticket);
+                } catch (Exception e) {
+                    if (i < parkinglots.size() - 1) {
+                        continue;
+                    } else throw e;
+                }
             }
         }
         return null;
@@ -59,7 +70,14 @@ public class Manager extends ParkingBoy {
 
     @Override
     public Car fetchCarbyTicket() throws Exception {
-        return super.fetchCarbyTicket();
+        if(fetchable!=null){
+            return fetchCar();
+        }
+        else try {
+            return parkinglots.get(0).fetchCarbyTicket();
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public void provideParkinglottoParkingboy(ParkingBoy parkingBoy)throws Exception{
@@ -111,6 +129,5 @@ public class Manager extends ParkingBoy {
             throw e;
         }
     }
-
 
 }

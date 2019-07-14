@@ -22,7 +22,7 @@ public class ParkingBoy implements Parkable, Fetchable {
                     continue;
                 }
 
-                    throw e;
+                throw e;
 
             }
         }
@@ -32,6 +32,10 @@ public class ParkingBoy implements Parkable, Fetchable {
 
     public void setParkinglots(List<Parkinglot> parkinglots) {
         this.parkinglots = parkinglots;
+    }
+
+    public void setParkinglots(Parkinglot parkinglots) {
+        this.parkinglots.add(parkinglots);
     }
 
     //    public List<ParkinglotTicket> park(List<Car> cars) throws Exception {
@@ -47,7 +51,7 @@ public class ParkingBoy implements Parkable, Fetchable {
             try {
                 return parkinglots.get(i).fetchCarbyTicket(ticket);
             } catch (Exception e) {
-                if (i < parkinglots.size()-1) {
+                if (i < parkinglots.size() - 1) {
                     continue;
                 } else throw e;
             }

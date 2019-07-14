@@ -188,8 +188,9 @@ public class Parkinglot_Test {
         ParkinglotTicket parkinglotTicket2 = smartParkingboy.park(car2);
 
 //        then
-        Assertions.assertEquals(car2,smartParkingboy.getParkinglots().get(1).fetchCarbyTicket(parkinglotTicket2));
+        Assertions.assertEquals(car2, smartParkingboy.getParkinglots().get(1).fetchCarbyTicket(parkinglotTicket2));
     }
+
     @Test
     public void should_return_car2_in_parkinglot2_when_park_smartly_give_super_smart_parking_boy_a_car() throws Exception {
 //        given
@@ -206,7 +207,34 @@ public class Parkinglot_Test {
         ParkinglotTicket parkinglotTicket2 = superSmartParkingboy.park(car2);
 
 //        then
-        Assertions.assertEquals(car2,superSmartParkingboy.getParkinglots().get(1).fetchCarbyTicket(parkinglotTicket2));
+        Assertions.assertEquals(car2, superSmartParkingboy.getParkinglots().get(1).fetchCarbyTicket(parkinglotTicket2));
+    }
+
+    @Test
+    public void should_park_car_and_fetch_car_when_manage_send_a_parkingboy_give_a_car() throws Exception {
+
+//        given
+        Parkinglot parkinglot1 = new Parkinglot(10);
+        Parkinglot parkinglot2 = new Parkinglot(10);
+        List<Parkinglot> parkinglots = new ArrayList<>();
+        parkinglots.add(parkinglot1);
+        parkinglots.add(parkinglot2);
+        Manager manager = new Manager(parkinglots);
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingBoy parkingBoy2 = new ParkingBoy();
+        manager.addParkingboy(parkingBoy);
+        manager.addParkingboy(parkingBoy2);
+        manager.provideParkinglottoParkingboy(parkingBoy);
+        manager.provideParkinglottoParkingboy(parkingBoy2);
+        Car car1 = new Car();
+        Car car2 = new Car();
+//        when
+        manager.setParkable(parkingBoy);
+        manager.setFetchable(parkingBoy);
+        ParkinglotTicket parkinglotTicket=manager.parkCar(car1);
+        Car car=manager.fetchCar(parkinglotTicket);
+//        then
+        Assertions.assertEquals(car1, car);
     }
 
 }

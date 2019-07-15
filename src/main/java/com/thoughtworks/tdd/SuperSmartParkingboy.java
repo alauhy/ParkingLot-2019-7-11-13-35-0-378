@@ -18,21 +18,6 @@ public class SuperSmartParkingboy extends ParkingBoy {
         }
     }
 
-    @Override
-    public void setParkinglots(List<Parkinglot> parkinglots) {
-        super.setParkinglots(parkinglots);
-    }
-
-    @Override
-    public Car fetchCarbyTicket(ParkinglotTicket ticket) throws Exception {
-        return super.fetchCarbyTicket(ticket);
-    }
-
-    @Override
-    public Car fetchCarbyTicket() throws Exception {
-        return super.fetchCarbyTicket();
-    }
-
     private Parkinglot findEmptiestParkinglot() {
         return super.getParkinglots().stream().max((a, b) -> a.validRate() >= b.validRate() ? 1 : -1).get();
 

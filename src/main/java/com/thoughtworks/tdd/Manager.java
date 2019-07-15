@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-public class Manager extends ParkingBoy {
+public class Manager implements Fetchable,Parkable{
     private Fetchable fetchable;
     private Parkable parkable;
     private List<ParkingBoy> parkingboyManageList = new ArrayList<>();
@@ -89,7 +89,7 @@ public class Manager extends ParkingBoy {
             }
             else throw new Exception("not enough parkinglot to provide");
         }
-        else throw new Exception("the parking boy is not your man1");
+        else throw new Exception("[Error occurred in Park]:the parking boy is not your man.");
 
 
     }
@@ -97,14 +97,14 @@ public class Manager extends ParkingBoy {
         if(parkingboyManageList.contains(fetchable)) {
             this.fetchable = fetchable;
         }
-        else throw new Exception("the parking boy is not your man2");
+        else throw new Exception("[Error occurred in fetch]:the parking boy is not your man.");
     }
 
     public void setParkable(Parkable parkable) throws Exception{
         if(parkingboyManageList.contains(parkable)){
             this.parkable = parkable;
         }
-        else throw new Exception("the parking boy is not your man3");
+        else throw new Exception("[Error occurred in fetch]:the parking boy is not your man.");
     }
 
     public ParkinglotTicket parkCar(Car car) throws Exception{
